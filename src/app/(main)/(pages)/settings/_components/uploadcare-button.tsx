@@ -1,35 +1,41 @@
-'use client'
-import React, { useEffect, useRef } from 'react'
-import * as LR from '@uploadcare/blocks'
-import { useRouter } from 'next/navigation'
+"use client";
+import React, { useEffect, useRef } from "react";
+import * as LR from "@uploadcare/blocks";
+import { useRouter } from "next/navigation";
 
 type Props = {
-  onUpload: (e: string) => any
-}
+  onUpload: (e: string) => any;
+};
 
-LR.registerBlocks(LR)
+LR.registerBlocks(LR);
 
 const UploadCareButton = ({ onUpload }: Props) => {
-  const router = useRouter()
+  const router = useRouter();
   const ctxProviderRef = useRef<
     typeof LR.UploadCtxProvider.prototype & LR.UploadCtxProvider
-  >(null)
+  >(null);
 
   useEffect(() => {
     const handleUpload = async (e: any) => {
-      const file = await onUpload(e.detail.cdnUrl)
+      const file = await onUpload(e.detail.cdnUrl);
       if (file) {
-        router.refresh()
+        router.refresh();
       }
-    }
-    ctxProviderRef.current.addEventListener('file-upload-success', handleUpload)
-  }, [])
+    };
+    ctxProviderRef.current.addEventListener(
+      "file-upload-success",
+      handleUpload
+    );
+  }, []);
 
   return (
     <div>
+      {/* <uc-config ctx-name="my-uploader" pubkey="YOUR_PUBLIC_KEY"></uc-config>
+      <uc-file-uploader-regular ctx-name="my-uploader"></uc-file-uploader-regular> */}
+
       <lr-config
         ctx-name="my-uploader"
-        pubkey="a9428ff5ff90ae7a64eb"
+        pubkey="cc0b0169650b161668be"
       />
 
       <lr-file-uploader-regular
@@ -42,7 +48,7 @@ const UploadCareButton = ({ onUpload }: Props) => {
         ref={ctxProviderRef}
       />
     </div>
-  )
-}
+  );
+};
 
-export default UploadCareButton
+export default UploadCareButton;
