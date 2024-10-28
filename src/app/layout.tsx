@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import {DM_Sans} from "next/font/google"
 import { ThemeProvider } from "@/providers/theme-provider";
 import "./globals.css";
+import {ClerkProvider} from '@clerk/nextjs'
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -30,6 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider>
     <html lang="en">
       <body
         className={`${font.className} antialiased`}
@@ -44,5 +46,6 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
+    </ClerkProvider>
   );
 }
